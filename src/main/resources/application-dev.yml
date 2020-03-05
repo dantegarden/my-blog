@@ -1,0 +1,60 @@
+###############################################################################
+## dev 开发环境
+###############################################################################
+
+server:
+  port: 8080
+  max-threads: 150
+  min-spare-threads: 30
+
+logging:
+  level:
+    root: info
+    com.dg.myblog: debug
+  file: log/blog-dev.log
+
+spring:
+  # dataSource
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      validation-query: SELECT 1
+      stat-view-servlet:
+        url-pattern: "/druid/*"
+      filter:
+        stat:
+          slow-sql-millis: 2000
+          log-slow-sql: true
+          merge-sql: true
+  #thymeleaf
+  thymeleaf:
+    mode: HTML
+    cache: false #上线改成true
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath*:/mybatis/mapper/**Mapper.xml
+  typeAliasesPackage: com.dg.myblog.model.*
+  global-config:
+    db-config:
+      id-type: auto  #主键策略自增
+      db-type: mysql
+      field-strategy: not_null #实体属性为null不拼入sql语句中
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false  #关闭二级缓存
+    default-statement-timeout: 600 # 事务超时时间
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    aggressive-lazy-loading: false
+
+file:
+  upload-dir: D:\workspace\upload

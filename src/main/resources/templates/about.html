@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/header :: head(~{::title})">
+    <title>关于我</title>
+</head>
+
+<body>
+<!--导航-->
+<nav th:replace="common/nav :: menu(5)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+</nav>
+
+<!--中间内容-->
+<div class="m-container m-padded-tb-big animated fadeIn">
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="eleven wide column">
+                <div class="ui segment">
+                    <img th:src="@{${portraiture[0]}}" alt="" class="ui rounded image">
+                </div>
+            </div>
+            <div class="five wide column">
+                <div class="ui top attached segment">
+                    <div class="ui header">About Me</div>
+                </div>
+                <div class="ui attached segment">
+                    <p class="m-text" th:each="item : ${introduction}" th:text="${item}">简介</p>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui orange basic left pointing label" th:each="item : ${keyword}" th:text="${item}">编程</div>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny" th:each="item : ${skill}" th:text="${item}">Java</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">...</div>
+                </div>
+                <div class="ui bottom attached segment">
+                    <a th:href="${github[0]}" class="ui circular icon button" target="_blank"><i class="github icon"></i></a>
+                    <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+                    <a href="#" class="ui qq circular icon button" th:data-content="${qq[0]}"
+                       data-position="bottom center"><i class="qq icon"></i></a>
+                </div>
+
+                <div class="ui wechat-qr flowing popup transition hidden">
+                    <img th:src="@{/images/wechat.jpg}" alt="" class="ui rounded image" style="width: 110px">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<br>
+<br>
+
+<footer th:replace="common/footer :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+</footer>
+<th:block th:replace="common/scripts :: script"></th:block>
+<script>
+    $('.wechat').popup({
+        popup: $('.wechat-qr'),
+        position: 'bottom center'
+    });
+    $('.qq').popup();
+</script>
+</body>
+</html>

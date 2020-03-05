@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dg.myblog.dao.BlogMapper">
+  <resultMap id="baseResultMap" type="com.dg.myblog.model.entity.Blog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="appreciation" jdbcType="BIT" property="appreciation" />
+    <result column="commentabled" jdbcType="BIT" property="commentabled" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="first_picture" jdbcType="VARCHAR" property="firstPicture" />
+    <result column="flag" jdbcType="VARCHAR" property="flag" />
+    <result column="published" jdbcType="BIT" property="published" />
+    <result column="recommend" jdbcType="BIT" property="recommend" />
+    <result column="share_statement" jdbcType="BIT" property="shareStatement" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="views" jdbcType="INTEGER" property="views" />
+    <result column="type_id" jdbcType="BIGINT" property="typeId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+  </resultMap>
+
+  <resultMap id="fullResultMap" type="com.dg.myblog.model.entity.Blog" extends="baseResultMap">
+    <association property="type" column="{id=type_id}" select="com.dg.myblog.dao.TypeMapper.selectById"  fetchType="lazy"/>
+    <association property="user" column="{id=user_id}" select="com.dg.myblog.dao.UserMapper.selectById"  fetchType="lazy"/>
+    <collection property="tags" column="{id=id}" ofType="com.dg.myblog.model.entity.Tag" select="selectTagsByBlogId" fetchType="lazy"/>
+  </resultMap>
+
+
+  <select id="selectTagsByBlogId" resultType="com.dg.myblog.model.entity.Tag">
+		select t.id, t.name
+		 from t_blog_tags bt, t_tag t
+		  where bt.blogs_id = #{id}
+		  and t.id = bt.tags_id
+  </select>
+
+  <select id="selectBolgByTagId" resultMap="baseResultMap">
+        select b.* from t_blog b
+        left join t_blog_tags bt
+        on b.id = bt.blogs_id
+        ${ew.customSqlSegment}
+  </select>
+
+  <update id="updateViews">
+        update t_blog set views = views+1 where id = #{id}
+  </update>
+
+  <select id="selectGroupMonth" resultType="java.lang.String">
+        SELECT DATE_FORMAT(b.update_time, '%Y年%m月') as month
+        FROM t_blog b
+        WHERE b.published = 1
+        group by DATE_FORMAT(b.update_time, '%Y年%m月')
+        order by month desc
+  </select>
+
+</mapper>
