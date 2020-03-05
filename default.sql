@@ -19,19 +19,19 @@ CREATE TABLE `t_aboutme`  (
 DROP TABLE IF EXISTS `t_blog`;
 CREATE TABLE `t_blog`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `appreciation` bit(1) NOT NULL,
-  `commentabled` bit(1) NOT NULL,
+  `appreciation` tinyint(1) NOT NULL DEFAULT 0,
+  `commentabled` tinyint(1) NOT NULL DEFAULT 0,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `first_picture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `flag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `published` bit(1) NOT NULL,
-  `recommend` bit(1) NOT NULL,
-  `share_statement` bit(1) NOT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT 0,
+  `recommend` tinyint(1) NOT NULL DEFAULT 0,
+  `share_statement` tinyint(1) NOT NULL DEFAULT 0,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
-  `views` int(11) NULL DEFAULT NULL,
+  `views` int(11) NULL DEFAULT 0,
   `type_id` bigint(20) NULL DEFAULT NULL,
   `user_id` bigint(20) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -39,7 +39,7 @@ CREATE TABLE `t_blog`  (
   INDEX `FK8ky5rrsxh01nkhctmo7d48p82`(`user_id`) USING BTREE,
   CONSTRAINT `FK292449gwg5yf7ocdlmswv9w4j` FOREIGN KEY (`type_id`) REFERENCES `t_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK8ky5rrsxh01nkhctmo7d48p82` FOREIGN KEY (`user_id`) REFERENCES `t_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for t_blog_tags
@@ -83,7 +83,7 @@ CREATE TABLE `t_tag`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for t_type
@@ -117,7 +117,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 INSERT INTO `t_type`(`id`, `name`) VALUES (1, '默认分类');
 
-INSERT INTO `t_user`(`id`, `avatar`, `create_time`, `email`, `nickname`, `password`, `type`, `update_time`, `username`) VALUES (1, 'https://unsplash.it/100/100?image=1005', '2017-10-15 12:36:04', 'hh@163.com', '管理员', '96e79218965eb72c92a549dd5a330112', 1, '2017-10-15 12:36:23', 'admin');
+INSERT INTO `t_user`(`id`, `avatar`, `create_time`, `email`, `nickname`, `password`, `type`, `update_time`, `username`) VALUES (1, 'https://unsplash.it/100/100?image=1005', '2017-10-15 12:36:04', '761043617@qq.com', 'dantegarden', 'd89267ba6e888426c8f798a04f2fb874', 1, '2017-10-15 12:36:23', 'admin');
 
 INSERT INTO `t_aboutme`(`id`, `type`, `value`, `sort`) VALUES (1, 'portraiture', 'https://unsplash.it/800/600?image=1005', 1);
 INSERT INTO `t_aboutme`(`id`, `type`, `value`, `sort`) VALUES (2, 'introduction', '个人用博客，纯手撸代码，日常工作和学习的技术积累。', 1);

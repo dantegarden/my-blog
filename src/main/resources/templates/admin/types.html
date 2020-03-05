@@ -48,7 +48,7 @@
       <tfoot>
         <tr>
           <th colspan="6" >
-            <div class="ui mini pagination menu" th:if="${page.total/page.size}>1">
+            <div class="ui mini pagination menu" th:if="${page.total > page.size}">
               <a th:href="@{/admin/types(pageNum=${page.current}-1)}" class="  item" th:unless="${page.current==1}">上一页</a>
               <a th:href="@{/admin/types(pageNum=${page.current}+1)}" class=" item" th:unless="${page.current*page.size >= page.total}">下一页</a>
             </div>
