@@ -18,7 +18,7 @@
         <div class="required field">
           <div class="ui left labeled input">
             <div class="ui selection compact teal basic dropdown label">
-              <input type="hidden" value="原创" name="flag" th:value="*{flag}" >
+              <input type="hidden" value="原创" name="flag" th:value="${#strings.isEmpty(blog.flag)?'原创':blog.flag}" >
               <i class="dropdown icon"></i>
               <div class="text">原创</div>
               <div id="flagMenu" class="menu">
@@ -35,6 +35,7 @@
           <div id="md-content" style="z-index: 1 !important;">
             <textarea placeholder="博客内容" name="content" style="display: none" th:text="*{content}"></textarea>
           </div>
+          <input type="hidden" name="contentView" th:value="*{contentView}">
         </div>
 
         <div class="two fields">
@@ -138,7 +139,8 @@
         path    : "/lib/editormd/lib/",
         imageUpload : true,
         imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-        imageUploadURL : "/file/upload"
+        imageUploadURL : "/file/upload",
+        saveHTMLToTextarea: true
       });
     });
 
@@ -148,12 +150,14 @@
 
     $('#save-btn').click(function () {
       $('[name="published"]').val(false);
+      $("#blog-form [name='contentView']").val(contentEditor.getHTML())
       $('#blog-form').submit();
     });
 
 
     $('#publish-btn').click(function () {
       $('[name="published"]').val(true);
+      $("#blog-form [name='contentView']").val(contentEditor.getHTML())
       $('#blog-form').submit();
     });
 

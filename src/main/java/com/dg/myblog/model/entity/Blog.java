@@ -42,6 +42,8 @@ public class Blog extends BaseModel<Blog> implements Serializable {
 
     private String content;
 
+    private String contentView;
+
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 

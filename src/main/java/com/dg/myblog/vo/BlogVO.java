@@ -23,6 +23,8 @@ public class BlogVO {
 
     private String content;
 
+    private String contentView;
+
     private Date createTime;
 
     private String description;

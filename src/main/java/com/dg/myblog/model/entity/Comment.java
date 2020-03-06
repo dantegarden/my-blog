@@ -47,6 +47,12 @@ public class Comment extends Model<Comment> implements Serializable {
     private Long blogId;
 
     private Long parentCommentId;
+    //重写setter
+    public void setParentCommentId(Long parentCommentId){
+        if(parentCommentId!=null && parentCommentId > 0){
+            this.parentCommentId = parentCommentId;
+        }
+    }
 
     @TableField(exist = false)
     private List<Comment> replyComments = new ArrayList<>();

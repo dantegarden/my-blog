@@ -57,6 +57,7 @@ public class CommentController {
         } else {
             comment.setAvatar(avatar);
         }
+
         commentService.save(comment);
         return "redirect:/comments/" + blogId;
     }

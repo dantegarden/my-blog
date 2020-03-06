@@ -179,3 +179,9 @@ body {
 .editormd-image-dialog {
     height: auto !important;
 }
+
+/*覆盖editormd的旧样式*/
+.markdown-body > code[class*="language-"], pre[class*="language-"] {
+    background-color: #272822 !important;
+}
+
