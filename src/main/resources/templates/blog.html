@@ -237,10 +237,18 @@
         headingSelector: 'h1, h2, h3',
     });
 
+    var resizePopup = function(){
+        $('.ui.popup').css({'max-height': "50em", "overflow": "auto"});
+    };
+
     $('.toc.button').popup({
         popup: $('.toc-container.popup'),
         on: 'click',
-        position: 'left center'
+        lastResort: 'left center',
+        position: 'left center',
+        onShow: function(){
+            resizePopup();
+        }
     });
 
     $('.wechat').popup({

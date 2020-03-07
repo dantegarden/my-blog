@@ -185,3 +185,7 @@ body {
     background-color: #272822 !important;
 }
 
+.ui.popup .is-collapsible {
+    max-height: none !important;
+}
+
