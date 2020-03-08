@@ -184,6 +184,9 @@ body {
 .markdown-body > code[class*="language-"], pre[class*="language-"] {
     background-color: #272822 !important;
 }
+.markdown-body p {
+    text-align: left !important;
+}
 
 .ui.popup .is-collapsible {
     max-height: none !important;

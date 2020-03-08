@@ -42,9 +42,13 @@ public class LoginController {
                         HttpSession session,
                         RedirectAttributes attributes) {
         try {
+            //如果已经登录，直接跳转到首页
+            if(SessionUtils.getCurrentUser() != null){
+                return "redirect:/admin/index";
+            }
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-            SecurityUtils.getSubject().login(token); //执行登录，没异常代表登陆成功
-//            session.setAttribute("user", SessionUtils.getCurrentUser());
+            //执行登录，没异常代表登陆成功
+            SecurityUtils.getSubject().login(token);
             return "admin/index";
         } catch (UnknownAccountException | IncorrectCredentialsException e) {
             attributes.addFlashAttribute("message", "用户名或密码错误");
@@ -56,7 +60,6 @@ public class LoginController {
     public String logout(HttpSession session) {
         Subject currentUser = SecurityUtils.getSubject();
         currentUser.logout();
-//        session.removeAttribute("user");
         return "redirect:/admin";
     }
 }

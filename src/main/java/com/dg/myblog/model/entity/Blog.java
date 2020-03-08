@@ -96,14 +96,13 @@ public class Blog extends BaseModel<Blog> implements Serializable {
     }
 
     public List<Comment> fetchComments(Boolean isFetchAllComments){
-        Comment comment = new Comment();
         QueryWrapper<Comment> queryWrapper = Wrappers.<Comment>query()
                 .eq("blog_id", this.id)
                 .isNull("parent_comment_id")
                 .orderByDesc("create_time");
-        this.comments = comment.selectList(queryWrapper);
+        this.comments = new Comment().selectList(queryWrapper);
         if(isFetchAllComments && CollectionUtil.isNotEmpty(this.comments)){
-            this.comments.forEach(_comment -> _comment.fetchReplyComments());
+            this.comments.forEach(comment -> comment.fetchReplyComments());
         }
         return this.comments;
     }

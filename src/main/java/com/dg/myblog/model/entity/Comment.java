@@ -70,12 +70,11 @@ public class Comment extends Model<Comment> implements Serializable {
     }
 
     public List<Comment> fetchReplyComments(){
-        Comment comment = new Comment();
-        List<Comment> replyComments = comment.selectList(Wrappers.<Comment>query().eq("parent_comment_id", this.id));
+        List<Comment> replyComments = new Comment().selectList(Wrappers.<Comment>query().eq("parent_comment_id", this.id));
         if(CollectionUtil.isNotEmpty(replyComments)){
-            replyComments.forEach(_comment -> {
-                _comment.setParentComment(this);
-                _comment.fetchReplyComments();
+            replyComments.forEach(comment -> {
+                comment.setParentComment(this);
+                comment.fetchReplyComments();
             });
             this.replyComments = replyComments;
         }

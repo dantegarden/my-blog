@@ -44,7 +44,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 .orderByDesc("create_time");
         List<Comment> comments = new Comment().selectList(queryWrapper);
         if(CollectionUtil.isNotEmpty(comments)){
-            comments.forEach(_comment -> _comment.fetchReplyComments());
+            comments.forEach(comment -> comment.fetchReplyComments());
         }
         return comments;
     }

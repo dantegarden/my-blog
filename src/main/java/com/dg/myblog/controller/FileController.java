@@ -47,7 +47,7 @@ public class FileController {
             }
 
             // 最终文件名
-            String finalFileName = new Date().getTime() + "." + FileUtil.extName(attach.getOriginalFilename());
+            String finalFileName = System.currentTimeMillis() + "." + FileUtil.extName(attach.getOriginalFilename());
             String finalFilePath = rootPath + File.separator + finalFileName;
             File realFile = new File(finalFilePath);
             attach.transferTo(realFile);
