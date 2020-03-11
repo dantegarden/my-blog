@@ -33,6 +33,10 @@ public class LoginController {
 
     @GetMapping
     public String loginPage() {
+        //如果已经登录，直接跳转到首页
+        if(SessionUtils.getCurrentUser() != null){
+            return "redirect:/admin/index";
+        }
         return "admin/login";
     }
 
@@ -42,10 +46,6 @@ public class LoginController {
                         HttpSession session,
                         RedirectAttributes attributes) {
         try {
-            //如果已经登录，直接跳转到首页
-            if(SessionUtils.getCurrentUser() != null){
-                return "redirect:/admin/index";
-            }
             UsernamePasswordToken token = new UsernamePasswordToken(username, password);
             //执行登录，没异常代表登陆成功
             SecurityUtils.getSubject().login(token);
