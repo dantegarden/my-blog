@@ -1,14 +1,11 @@
 package com.dg.myblog.global.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
@@ -21,8 +18,15 @@ import java.util.Map;
 @Slf4j
 public class MybatisFillHandler implements MetaObjectHandler {
 
-    private static final Map<String,Object> DEFAULT_INSERT_MAP = ImmutableMap.of("createTime", new Date(), "updateTime", new Date());
-    private static final Map<String,Object> DEFAULT_UPDATE_MAP = ImmutableMap.of("updateTime", new Date());
+    private static final Map<String,Object> DEFAULT_INSERT_MAP = Maps.newLinkedHashMap();
+    private static final Map<String,Object> DEFAULT_UPDATE_MAP = Maps.newLinkedHashMap();
+
+    static {
+        DEFAULT_INSERT_MAP.put("createTime", new Date());
+        DEFAULT_INSERT_MAP.put("updateTime", new Date());
+
+        DEFAULT_UPDATE_MAP.put("updateTime", new Date());
+    }
 
     @Override
     public void insertFill(MetaObject metaObject) {
