@@ -1,10 +1,8 @@
 package com.dg.myblog.controller.admin;
 
 import com.dg.myblog.global.utils.SessionUtils;
-import com.dg.myblog.model.entity.User;
 import com.dg.myblog.service.UserService;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -35,7 +33,7 @@ public class LoginController {
     public String loginPage() {
         //如果已经登录，直接跳转到首页
         if(SessionUtils.getCurrentUser() != null){
-            return "redirect:/admin/index";
+            return "redirect: admin/index";
         }
         return "admin/login";
     }
