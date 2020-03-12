@@ -1,5 +1,6 @@
 package com.dg.myblog.global.handler;
 
+import com.dg.myblog.global.exception.RateLimitException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,6 +31,15 @@ public class GlobalExceptionHandler {
         ModelAndView mv = new ModelAndView();
         mv.addObject("url", request.getRequestURL());
         mv.addObject("exception", e);
+        mv.setViewName("error/error"); //导向error页面
+        return mv;
+    }
+
+    @ExceptionHandler(RateLimitException.class)
+    public ModelAndView rateLimitExceptionHander(HttpServletRequest request, Exception e) throws Exception {
+        log.error("Request URL : {}，Exception : {}", request.getRequestURL(), e);
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("rateLimited", true);
         mv.setViewName("error/error"); //导向error页面
         return mv;
     }

@@ -17,7 +17,8 @@
     <div class="ui error message m-padded-tb-huge">
         <div class="ui contianer">
             <h2>错误</h2>
-            <p>对不起，服务器发生异常</p>
+            <p th:if="${rateLimited}">访问过于频繁，请稍后刷新页面</p>
+            <p th:unless="${rateLimited}">对不起，服务器发生异常</p>
         </div>
     </div>
 </div>
