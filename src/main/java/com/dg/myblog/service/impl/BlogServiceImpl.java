@@ -19,7 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -128,7 +128,7 @@ public class BlogServiceImpl extends ServiceImpl<BlogMapper, Blog> implements Bl
     @Override
     public Map<String, List<Blog>> archiveBlog() {
         List<String> months = this.baseMapper.selectGroupMonth();
-        Map<String, List<Blog>> map = new HashMap<>();
+        Map<String, List<Blog>> map = new LinkedHashMap<>();
         if(CollectionUtil.isNotEmpty(months)){
             for (String month : months) {
                 QueryWrapper<Blog> queryWrapper = getBlogQueryWrapper();
