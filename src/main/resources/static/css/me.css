@@ -192,3 +192,6 @@ body {
     max-height: none !important;
 }
 
+.m-footer-zindex {
+    z-index: -9999;
+}

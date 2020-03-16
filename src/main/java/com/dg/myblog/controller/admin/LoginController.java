@@ -33,7 +33,7 @@ public class LoginController {
     public String loginPage() {
         //如果已经登录，直接跳转到首页
         if(SessionUtils.getCurrentUser() != null){
-            return "redirect: admin/index";
+            return "admin/index";
         }
         return "admin/login";
     }

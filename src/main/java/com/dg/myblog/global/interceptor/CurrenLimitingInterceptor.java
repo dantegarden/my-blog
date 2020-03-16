@@ -23,6 +23,7 @@ public class CurrenLimitingInterceptor extends HandlerInterceptorAdapter {
         if(!isLimited){
             throw new RateLimitException("访问太过频繁！");
         }
+
         return true;
     }
 }
