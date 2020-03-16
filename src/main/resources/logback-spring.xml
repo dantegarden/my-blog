@@ -19,7 +19,6 @@
             <fileNamePattern>${log.path}/%d{yyyy-MM}/debug.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <maxFileSize>50MB</maxFileSize>
             <maxHistory>30</maxHistory>
-            <totalSizeCap>1G</totalSizeCap>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
