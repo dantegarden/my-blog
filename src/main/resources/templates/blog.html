@@ -202,7 +202,7 @@
     </div>
 </div>
 
-<div class="ui toc-container flowing popup transition hidden" style="bottom: .25em !important; top: auto !important; width: 250px!important;">
+<div class="ui toc-container flowing popup transition hidden" style="width: 250px!important;">
     <ol class="js-toc">
 
     </ol>
@@ -248,6 +248,9 @@
         position: 'left center',
         onShow: function(){
             resizePopup();
+        },
+        onVisible: function(){
+            $(this).css({"bottom": "1em", "top": 'auto', "width": "250px"})
         }
     });
 
