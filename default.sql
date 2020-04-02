@@ -22,6 +22,7 @@ CREATE TABLE `t_blog`  (
   `appreciation` tinyint(1) NOT NULL DEFAULT 0,
   `commentabled` tinyint(1) NOT NULL DEFAULT 0,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
+  `content_view` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   `create_time` datetime(0) NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `first_picture` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,

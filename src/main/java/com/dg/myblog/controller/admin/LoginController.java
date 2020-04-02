@@ -1,5 +1,6 @@
 package com.dg.myblog.controller.admin;
 
+import com.dg.myblog.global.GlobalConstants;
 import com.dg.myblog.global.utils.SessionUtils;
 import com.dg.myblog.service.UserService;
 import org.apache.shiro.SecurityUtils;
@@ -49,6 +50,8 @@ public class LoginController {
             SecurityUtils.getSubject().login(token);
             return "admin/index";
         } catch (UnknownAccountException | IncorrectCredentialsException e) {
+            //删除shiro session中的当前用户
+            SessionUtils.getCurrentSession().removeAttribute(GlobalConstants.USER_TOKEN);
             attributes.addFlashAttribute("message", "用户名或密码错误");
             return "redirect:/admin";
         }
