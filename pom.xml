@@ -35,7 +35,7 @@
         <guava.version>23.0</guava.version>
         <hutool.version>5.1.1</hutool.version>
         <commonmark.version>0.10.0</commonmark.version>
-        <shiro.version>1.4.2</shiro.version>
+        <shiro.version>1.6.0</shiro.version>
     </properties>
 
     <dependencies>
